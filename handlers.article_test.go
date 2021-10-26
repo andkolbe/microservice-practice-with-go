@@ -12,6 +12,8 @@ import (
 func TestShowIndexPageUnauthenticated(t *testing.T) {
 	r := getRouter(true)
 
+	r.GET("/", showIndexPage)
+
 	// create a request to send to the above route
 	req, _ := http.NewRequest("GET", "/", nil)
 
