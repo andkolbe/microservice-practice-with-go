@@ -33,6 +33,4 @@ func render(c *gin.Context, data gin.H, templateName string) {
 	default:
 		c.HTML(http.StatusOK, templateName, data)
 	}
-	
-
 }

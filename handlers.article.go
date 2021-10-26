@@ -10,18 +10,8 @@ import (
 func showIndexPage(c *gin.Context) {
 	articles := getAllArticles()
 
-	// call the HTML method of the Context to render a template
-	c.HTML(
-		// Set the HTTP status to 200 (ok)
-		http.StatusOK,
-		// use the index.html template
-		"index.html",
-		// Pass the data that the page uses (in this case, 'title')
-		gin.H {
-			"title": "Home Page", // set the title to Home Page 
-			"payload": articles,
-		},
-	)
+	// call render function with the same name of the template to render
+	render(c, gin.H{"title": "Home Page", "payload": articles}, "index.html")
 }
 
 func getArticle(c *gin.Context) {
@@ -37,7 +27,7 @@ func getArticle(c *gin.Context) {
 				"article.html",
 				// pass the data that the page uses
 				gin.H{
-					"title": article.Title,
+					"title":   article.Title,
 					"payload": article,
 				},
 			)
