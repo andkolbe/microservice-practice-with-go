@@ -19,18 +19,8 @@ func getArticle(c *gin.Context) {
 	if articleID, err := strconv.Atoi(c.Param("article_id")); err == nil {
 		// check if the article exists
 		if article, err := getArticleByID(articleID); err == nil {
-			// call the HTML method of the Context to render a template
-			c.HTML(
-				// set the HTTP status code to 200 (OK)
-				http.StatusOK,
-				// use the index.html template
-				"article.html",
-				// pass the data that the page uses
-				gin.H{
-					"title":   article.Title,
-					"payload": article,
-				},
-			)
+			// Call the render function with the title, article and the name of the template
+			render(c, gin.H{"title": article.Title, "payload": article}, "article.html")
 		} else {
 			// if the article is not found, abort with an error
 			c.AbortWithError(http.StatusNotFound, err)
